@@ -1,3 +1,17 @@
+# Fixnum method from http://johnallen.us/?p=380
+
+class Fixnum
+  def commas
+    self.to_s =~ /([^\.]*)(\..*)?/
+    int, dec = $1.reverse, $2 ? $2 : ""
+    while int.gsub!(/(,|\.|^)(\d{3})(\d)/, '\1\2,\3')
+    end
+    int.reverse + dec
+  end
+end
+
+
+
 class CoinCombinations
 
   COINS = {
@@ -77,7 +91,7 @@ class CoinCombinations
     user_input_to_words = String.new
 
     if dollars > 0
-      user_input_to_words.concat("#{dollars} #{dollars_pluralize(dollars)} ")
+      user_input_to_words.concat("#{dollars.commas} #{dollars_pluralize(dollars)} ")
     end
     if change > 0
       user_input_to_words.concat("#{change} #{cents_pluralize(change)}")
