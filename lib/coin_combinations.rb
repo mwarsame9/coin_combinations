@@ -48,7 +48,7 @@ class CoinCombinations
       "#{number_of_coins} pennies"
     else
       coin_name = coin + "s"
-      "#{number_of_coins} #{coin_name}"
+      "#{number_of_coins.commas} #{coin_name}"
     end
   end
 
