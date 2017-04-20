@@ -11,6 +11,14 @@ class CoinCombinations
     user_input.match(/\A[0-9]+\z/)
   end
 
+  def print_to_screen(user_input)
+    unless is_valid?(user_input)
+      "invalid input"
+    else
+      "From the #{user_change(user_input)} you input, your change would be: #{calculate_coins(user_input)}"
+    end
+  end
+
   def get_coins(user_input)
     unless is_valid?(user_input)
       "invalid input"
@@ -49,8 +57,50 @@ class CoinCombinations
         output.push(coin_plural(number_of_coins, coin))
       end
     end
-    
+
     output.join(", ")
+  end
+
+  def user_change(user_input)
+    change = user_input.slice(-2,2).to_i
+    dollars = 0
+
+    if user_input.to_i > 99
+      dollars += (user_input.to_i - change) / 100
+    end
+
+    if user_input.to_i < 99
+      change = user_input.to_i
+    end
+
+
+    user_input_to_words = String.new
+
+    if dollars > 0
+      user_input_to_words.concat("#{dollars} #{dollars_pluralize(dollars)} ")
+    end
+    if change > 0
+      user_input_to_words.concat("#{change} #{cents_pluralize(change)}")
+    end
+
+    user_input_to_words.rstrip
+
+  end
+
+  def cents_pluralize(num)
+    if num > 1
+      "cents"
+    elsif num == 1
+      "cent"
+    end
+  end
+
+  def dollars_pluralize(num)
+    if num > 1
+      "dollars"
+    elsif num == 1
+      "dollar"
+    end
   end
 
 end

@@ -9,6 +9,6 @@ end
 
 get('/coins') do
   combination = CoinCombinations.new
-  @coins = combination.get_coins(params.fetch('coins'))
+  @coins = combination.print_to_screen(params.fetch('coins'))
   erb(:output)
 end

@@ -80,3 +80,35 @@ describe('CoinCombinations#coin_plural') do
     expect(combination.coin_plural(4, "penny")).to(eq("4 pennies"))
   end
 end
+
+describe('CoinCombinations#user_change') do
+  let(:combination) { CoinCombinations.new }
+
+  it ("returns '3 cents' from user input of 3") do
+    expect(combination.user_change("3")).to(eq("3 cents"))
+  end
+  it ("returns '99 cents' from user input of 99") do
+    expect(combination.user_change("99")).to(eq("99 cents"))
+  end
+  it ("returns '1 dollar 23 cents' from user input of 123") do
+    expect(combination.user_change("123")).to(eq("1 dollar 23 cents"))
+  end
+  it ("returns '2 dollars 23 cents' from user input of 223") do
+    expect(combination.user_change("223")).to(eq("2 dollars 23 cents"))
+  end
+  it ("returns '5 dollars 1 cent' from user input of 501") do
+    expect(combination.user_change("501")).to(eq("5 dollars 1 cent"))
+  end
+  it ("returns '10 dollars' from user input of 501") do
+    expect(combination.user_change("1000")).to(eq("10 dollars"))
+  end
+  it ("returns '1 dollar 1 cent' from user input of 501") do
+    expect(combination.user_change("101")).to(eq("1 dollar 1 cent"))
+  end
+  it ("returns '1 dollar' from user input of 100") do
+    expect(combination.user_change("100")).to(eq("1 dollar"))
+  end
+  it ("returns '1,100 dollars' from user input of 110000") do
+    expect(combination.user_change("110000")).to(eq("1,100 dollars"))
+  end
+end
